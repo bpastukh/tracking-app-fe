@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     });
 
     this.userService.isAuthenticated.asObservable().subscribe((isAuthenticated) => {
+      console.log(isAuthenticated);
       if (isAuthenticated) {
         this.router.navigate([this.returnUrl]);
       }

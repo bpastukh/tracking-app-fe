@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateTaskDialogComponent} from './create-task-dialog/create-task-dialog.component';
 import {GenerateReportDialogComponent} from './generate-report-dialog/generate-report-dialog.component';
+import {UserService} from '../service/user.service';
 
 @Component({
   selector: 'app-task',
@@ -18,7 +19,7 @@ export class TaskComponent implements OnInit {
   displayedColumns: string[] = ['title', 'comment', 'loggedTime', 'createdAt'];
   dataSource = new MatTableDataSource<Task>();
 
-  constructor(private taskService: TaskService, private dialog: MatDialog) {
+  constructor(private taskService: TaskService, private dialog: MatDialog, public userService: UserService) {
   }
 
   addTask(): void {

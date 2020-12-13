@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {ApiResponse} from '../model/ApiResponse';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {ApiResponse} from '../model/ApiResponse';
 export class UserService {
   public isAuthenticated = new BehaviorSubject<boolean>(false);
 
-  constructor(private client: HttpClient) {
+  constructor(private client: HttpClient, private router: Router) {
   }
 
   login(email: string, password: string): Observable<any> {
@@ -30,7 +31,12 @@ export class UserService {
   }
 
   logout(): void {
-    this.isAuthenticated.next(false);
+    this.client.post<{ code: number, payload: any }>(`${environment.apiUrl}/logout`, {}, {withCredentials: true})
+      .subscribe(() => {
+          this.isAuthenticated.next(false);
+          this.router.navigateByUrl('/login');
+        }
+      );
   }
 
   register(email: string, password: string): Observable<ApiResponse> {
