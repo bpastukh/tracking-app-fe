@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Add task</h1>
+<div class="dialog" mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-error *ngIf="error">
+      {{error}}
+    </mat-error>
+    <mat-form-field class="full-width-input">
+      <input formControlName="title" matInput placeholder="Title" required>
+      <mat-error>
+        Please provide a valid title
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+      <input formControlName="comment" matInput placeholder="Comment">
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+      <input formControlName="loggedTime" matInput placeholder="Logged time" required>
+      <mat-error>
+        Please provide a valid logged time
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+      <mat-label>Created at</mat-label>
+      <input [matDatepicker]="picker" formControlName="createdAt" matInput required>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>
+        Please provide a valid creation date
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button (click)="submit()" cdkFocusInitial color="primary" mat-button>Add</button>
+    <button (click)="cancel()" color="warn" mat-button>Cancel</button>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<div class="block">
+  <div class="panel">
+    <div class="panel-col">
+      <div class="panel-box">
+        <ul class="pager">
+          <li (click)="changePage(currentPage - 1)">
+            <a class="pager-prev"></a>
+          </li>
+          <li *ngFor="let page of pages; let i = index;">
+            <span *ngIf="currentPage === page">{{ page }}</span>
+            <a *ngIf="!(currentPage === page) && page === '...'">{{ page }}</a>
+            <a (click)="changePage(page)" *ngIf="!(currentPage === page) && page !== '...'">{{ page }}</a>
+          </li>
+          <li (click)="changePage(currentPage + 1)">
+            <a class="pager-next"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
