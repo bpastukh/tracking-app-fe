@@ -14,13 +14,13 @@ const moment = _moment;
   providers: [],
 })
 export class GenerateReportDialogComponent {
-  form: FormGroup = this.formBuilder.group({
+  public form: FormGroup = this.formBuilder.group({
     dateFrom: ['', [Validators.required]],
     dateTo: ['', [Validators.required]],
     format: ['pdf', [Validators.required]],
   });
+  public error?: string;
 
-  error?: string;
 
   constructor(
     private formBuilder: FormBuilder,

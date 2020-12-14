@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../service/user.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  form!: FormGroup;
+export class RegisterComponent implements OnInit, OnDestroy {
   public requestFailed = false;
+  public form!: FormGroup;
   private returnUrl = '/task';
+  private subscription: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -27,11 +29,13 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.userService.isAuthenticated.asObservable().subscribe((isAuthenticated) => {
-      if (isAuthenticated) {
-        this.router.navigate([this.returnUrl]);
-      }
-    });
+    this.subscription.push(
+      this.userService.isAuthenticated.asObservable().subscribe((isAuthenticated) => {
+        if (isAuthenticated) {
+          this.router.navigate([this.returnUrl]);
+        }
+      })
+    );
   }
 
   async onSubmit() {
@@ -51,5 +55,9 @@ export class RegisterComponent implements OnInit {
         () => this.requestFailed = true
       );
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach((subscr) => subscr.unsubscribe());
   }
 }
