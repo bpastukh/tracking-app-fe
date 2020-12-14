@@ -17,7 +17,6 @@ import {TaskComponent} from './task/task.component';
 import {RegisterComponent} from './register/register.component';
 import {ErrorInterceptor} from './helper/error.interceptor';
 import {MatTableModule} from '@angular/material/table';
-import {PaginationComponent} from './pagination/pagination.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {CreateTaskDialogComponent} from './task/create-task-dialog/create-task-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -26,6 +25,7 @@ import {MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/material/core';
 import {GenerateReportDialogComponent} from './task/generate-report-dialog/generate-report-dialog.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MomentDateModule} from '@angular/material-moment-adapter';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 export const MY_FORMATS = {
   parse: {
@@ -46,7 +46,6 @@ export const MY_FORMATS = {
     LoginComponent,
     TaskComponent,
     RegisterComponent,
-    PaginationComponent,
     CreateTaskDialogComponent,
     GenerateReportDialogComponent,
   ],
@@ -67,6 +66,7 @@ export const MY_FORMATS = {
     MatNativeDateModule,
     MatSelectModule,
     MomentDateModule,
+    MatPaginatorModule,
   ],
   providers: [
     UserService,

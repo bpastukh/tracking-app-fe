@@ -7,6 +7,7 @@ import {CreateTaskDialogComponent} from './create-task-dialog/create-task-dialog
 import {GenerateReportDialogComponent} from './generate-report-dialog/generate-report-dialog.component';
 import {UserService} from '../service/user.service';
 import {Subscription} from 'rxjs';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-task',
@@ -14,7 +15,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit, OnDestroy {
-  public pageNumber = 1;
+  public pageNumber = 0;
   public totalPages = 0;
   public displayedColumns: string[] = ['title', 'comment', 'loggedTime', 'createdAt'];
   public dataSource = new MatTableDataSource<Task>();
@@ -30,7 +31,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.subscription.push(
       dialogRef.afterClosed().subscribe(shouldUpdateData => {
         if (shouldUpdateData) {
-          this.pageNumber = 1;
+          this.pageNumber = 0;
           this.fetchTasks();
         }
       })
@@ -45,8 +46,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.fetchTasks();
   }
 
-  onPageChanged(page: number) {
-    this.pageNumber = page;
+  onPageChanged(event: PageEvent) {
+    this.pageNumber = event.pageIndex;
     this.fetchTasks();
   }
 

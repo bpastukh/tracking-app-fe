@@ -43,6 +43,10 @@
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
     <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
   </table>
+  <mat-paginator [length]="totalPages * 10"
+                 pageSize="10"
+                 (page)="onPageChanged($event)">
+  </mat-paginator>
   <app-pagination (pageChanged)="onPageChanged($event)" [pagesAmount]="totalPages"></app-pagination>
 </div>
 
