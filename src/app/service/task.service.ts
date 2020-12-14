@@ -23,7 +23,7 @@ export class TaskService {
     }, {withCredentials: true});
   }
 
-  public list(page: number): Observable<ApiResponse> {
+  public list(page: number): Observable<{ payload: { items: Task[], totalPages: number } }> {
     const params = new HttpParams().append('page', String(page));
     return this.httpClient.get<ApiResponse>(`${environment.apiUrl}${TaskService.ROOT_ENDPOINT}`, {params, withCredentials: true});
   }

@@ -29,7 +29,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent);
 
     this.subscription.push(
-      dialogRef.afterClosed().subscribe(shouldUpdateData => {
+      dialogRef.afterClosed().subscribe((shouldUpdateData = false) => {
         if (shouldUpdateData) {
           this.pageNumber = 0;
           this.fetchTasks();
@@ -54,7 +54,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   private fetchTasks() {
     this.subscription.push(
       this.taskService.list(this.pageNumber).subscribe(
-        (data: { payload: { items: Task[], totalPages: number } }) => {
+        (data) => {
           this.dataSource.data = data.payload.items;
           this.totalPages = data.payload.totalPages;
         }

@@ -28,11 +28,6 @@ export class GenerateReportDialogComponent {
     private dialogRef: MatDialogRef<GenerateReportDialogComponent>) {
   }
 
-
-  cancel(): void {
-    this.dialogRef.close();
-  }
-
   submit(): void {
     this.error = undefined;
     if (this.form.invalid) {

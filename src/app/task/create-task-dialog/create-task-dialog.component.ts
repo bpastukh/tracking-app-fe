@@ -26,10 +26,6 @@ export class CreateTaskDialogComponent implements OnDestroy {
     private dialogRef: MatDialogRef<CreateTaskDialogComponent>) {
   }
 
-  cancel(): void {
-    this.dialogRef.close(false);
-  }
-
   submit(): void {
     this.error = undefined;
     this.subscription.push(
