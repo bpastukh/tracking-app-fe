@@ -5,6 +5,7 @@ import {ApiResponse} from '../model/ApiResponse';
 import {environment} from '../../environments/environment';
 import {Task} from '../model/Task';
 import * as moment from 'moment';
+import {formatDate} from '../utils/date-formatter';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class TaskService {
   }
 
   public create(task: Task): Observable<ApiResponse> {
-    const createdAt = moment(task.createdAt).format('Y-MM-DD 00:00:00');
+    const createdAt = formatDate(moment(task.createdAt));
     return this.httpClient.post<ApiResponse>(`${environment.apiUrl}${TaskService.ROOT_ENDPOINT}`, {
       ...task,
       createdAt
